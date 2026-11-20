@@ -1,0 +1,31 @@
+// B2. Desencadenante Al crear (fuente Llegadas)
+Object item = param(1);
+Object s = Model.find("Salida");
+Table t = Table("TablaLlegadas");
+for (int i = 1; i <= t.numRows; i++) {
+    if (Math.fabs(t[i][1] - Model.time) < 0.001) {
+        item.Tipo = t[i][2];
+        item.Productos = t[i][3];
+        break;
+    }
+}
+item.Llegada = Model.time;
+s.EnFila = s.EnFila + 1;
+int u3 = 6;
+int u4 = 15;
+if (Model.parameters.Regla == 2) { u3 = 3; u4 = 8; }
+if (s.C3 == 0 && s.EnFila >= u3) {
+    resumeobject(Model.find("Caja3"));
+    s.C3 = 1;
+    s.HoraC3 = Model.time;
+}
+if (s.C4 == 0 && s.EnFila >= u4) {
+    resumeobject(Model.find("Caja4"));
+    s.C4 = 1;
+    s.HoraC4 = Model.time;
+}
+if (Model.parameters.Caja5 == 2 && s.C5 == 0 && s.EnFila >= 20) {
+    resumeobject(Model.find("Caja5"));
+    s.C5 = 1;
+    s.HoraC5 = Model.time;
+}

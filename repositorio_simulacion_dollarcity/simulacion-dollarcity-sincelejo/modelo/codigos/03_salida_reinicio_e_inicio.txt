@@ -1,0 +1,12 @@
+// B4. Desencadenantes Al reinicio y Al inicio de simulación (sumidero Salida)
+// Al reinicio
+Object s = Model.find("Salida");
+s.SumaEspera = 0;  s.MaxEspera = 0;  s.Clientes = 0;  s.Antes20 = 0;
+s.EnFila = 0;  s.C3 = 0;  s.C4 = 0;  s.C5 = 0;
+s.HoraC3 = 0;  s.HoraC4 = 0;  s.HoraC5 = 0;
+s.Tipo1 = 0;  s.Tipo2 = 0;  s.Tipo3 = 0;
+
+// Al inicio de simulación
+stopobject(Model.find("Caja3"), STATE_SCHEDULED_DOWN);
+stopobject(Model.find("Caja4"), STATE_SCHEDULED_DOWN);
+stopobject(Model.find("Caja5"), STATE_SCHEDULED_DOWN);

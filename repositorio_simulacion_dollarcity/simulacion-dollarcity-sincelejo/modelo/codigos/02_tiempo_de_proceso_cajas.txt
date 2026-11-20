@@ -1,0 +1,31 @@
+// B3. Tiempo de proceso (cajas 1 a 5)
+Object item = param(1);
+Object s = Model.find("Salida");
+s.EnFila = s.EnFila - 1;
+if (item.Tipo == 1) s.Tipo1 = s.Tipo1 + 1;
+if (item.Tipo == 2) s.Tipo2 = s.Tipo2 + 1;
+if (item.Tipo == 3) s.Tipo3 = s.Tipo3 + 1;
+double reg = 0;
+double emp = 0;
+if (item.Tipo == 1) {
+    reg = Math.exp(normal(0.538, 0.175, 3));
+    emp = Math.exp(normal(-0.026, 0.268, 4));
+} else if (item.Tipo == 2) {
+    reg = Math.exp(normal(0.755, 0.193, 3));
+    emp = Math.exp(normal(0.312, 0.206, 4));
+} else {
+    reg = Math.exp(normal(1.293, 0.226, 3));
+    emp = Math.exp(normal(0.832, 0.244, 4));
+}
+double total = reg + emp;
+double fin = reg + emp;
+if (Model.parameters.Empaque == 2) {
+    total = reg + 0.5;
+    fin = reg + 0.5 + emp;
+}
+double e = Model.time - item.Llegada;
+s.SumaEspera = s.SumaEspera + e;
+s.Clientes = s.Clientes + 1;
+if (e > s.MaxEspera) s.MaxEspera = e;
+if (Model.time + fin <= 180) s.Antes20 = s.Antes20 + 1;
+return total;

@@ -1,0 +1,7 @@
+// B1. Tiempo entre llegadas (fuente Llegadas)
+Table t = Table("TablaLlegadas");
+double ahora = Model.time;
+for (int i = 1; i <= t.numRows; i++) {
+    if (t[i][1] > ahora + 0.0001) return t[i][1] - ahora;
+}
+return 100000;

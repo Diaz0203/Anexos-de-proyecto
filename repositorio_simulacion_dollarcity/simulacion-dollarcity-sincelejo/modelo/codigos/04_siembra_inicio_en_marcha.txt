@@ -1,0 +1,4 @@
+// B5. Siembra por escenario (desencadenante del modelo Inicio en marcha)
+int esc = Model.parameters.Regla * 100 + Model.parameters.Caja5 * 10 + Model.parameters.Empaque;
+int base = duniform(1, 99999, 0);
+for (int k = 0; k <= 10; k++) randinit(k, base + 1000000 * esc + k);
